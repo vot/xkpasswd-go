@@ -1,6 +1,6 @@
 # xkpasswd.go
 
-A clone of my [xkpasswd.js](https://github.com/vot/xkpasswd.js) module written in Go.
+A clone of my [xkpasswd-node](https://github.com/vot/xkpasswd-node) module, written in Go.
 
 You can build the project with
 `go build`
