@@ -41,33 +41,122 @@ func getRandomWord () (string) {
   return allWords[randomNumber]
 }
 
-func generatePassword (compl int) (string) {
-  separator := "#"
-  s := []string{getRandomWord(), getRandomWord(), getRandomWord(), getRandomWord()}
-  var output string = strings.Join(s, separator)
-  return output
+func generatePassword (pattern string, separator string) (string) {
+  words := patternToArray(pattern)
+  return strings.Join(words, separator)
 }
 
-// TODO download list of words if missing
+func patternToArray(pattern string) ([]string) {
+  // TODO iterate over each character in a pattern
+  array := []string{getRandomWord(), getRandomWord(), getRandomWord()}
+
+  return array
+}
+
+func getSeparatorForComplexity (level int) (string) {
+  // TODO get a random character from string
+  return "#"
+}
+
+func getPatternForComplexity (level int) (string) {
+  rtn := "wswsw"
+
+  // enforce limits
+  if level < 1 {
+    level = 1
+  }
+
+  if level > 6 {
+    level = 6
+  }
+
+  // define level patterns
+  if level == 1 {
+    rtn = "wsw"
+  }
+
+  if level == 2 {
+    rtn = "wswsw"
+  }
+
+  if level == 3 {
+    rtn = "wswswsdd"
+  }
+
+  if level == 4 {
+    rtn = "wswswswsdd"
+  }
+
+  if level == 5 {
+    rtn = "wswswswswsd"
+  }
+
+  if level == 6 {
+    rtn = "ddswswswswswsdd"
+  }
+
+  return rtn
+}
+
 func main() {
+  // TODO download list of words if missing
   app := cli.NewApp()
   app.Name = "xkpasswd"
-  app.Usage = "Generate memorable passwords"
+  app.Version = "0.0.1"
+  app.Usage = "Memorable password generator"
 
-  var complexity int
+  var inputComplexity int
+  var inputPattern string
+  var inputSeparator string
+  var inputNumber int
 
   app.Flags = []cli.Flag {
     cli.IntFlag{
       Name:        "complexity, c",
-      Value:       3,
-      Usage:       "Define complexity (1-5)",
-      Destination: &complexity,
+      Value:       2,
+      Usage:       "Define complexity (1-6)",
+      Destination: &inputComplexity,
+    },
+    cli.StringFlag{
+      Name:        "pattern, p",
+      Value:       "",
+      Usage:       "Define pattern (w = word, d = digit, s = separator)",
+      Destination: &inputPattern,
+    },
+    cli.StringFlag{
+      Name:        "separator, s",
+      Value:       "",
+      Usage:       "Define separator character",
+      Destination: &inputSeparator,
+    },
+    cli.IntFlag{
+      Name:        "number, n",
+      Value:       1,
+      Usage:       "Define number of passwords to generate",
+      Destination: &inputNumber,
     },
   }
 
   app.Action = func(c *cli.Context) error {
-    var output string = generatePassword(complexity)
-    fmt.Println(output)
+    var pattern string
+    var separator string
+
+    if len(inputPattern) > 0 {
+      pattern = inputPattern
+    } else {
+      pattern = getPatternForComplexity(inputComplexity)
+    }
+
+    if len(inputSeparator) > 0 {
+      separator = inputSeparator
+    } else {
+      separator = getSeparatorForComplexity(inputComplexity)
+    }
+
+    for i := 0; i < inputNumber; i++ {
+      fmt.Println(generatePassword(pattern, separator))
+    }
+
     return nil
   }
 
