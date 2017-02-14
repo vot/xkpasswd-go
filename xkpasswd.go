@@ -21,7 +21,7 @@ func readLinesSimple(path string) ([]string, error) {
 }
 
 func getWords() (int, []string) {
-  var url string = "words.txt"
+  var url string = "xkpasswd-words.txt"
 
   lines, err := readLinesSimple(url)
   if err != nil {
