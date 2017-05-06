@@ -4,6 +4,7 @@ import "fmt"
 import "log"
 import "time"
 import "strings"
+import "strconv"
 import "os"
 
 import "math/rand"
@@ -41,14 +42,35 @@ func getRandomWord () (string) {
   return allWords[randomNumber]
 }
 
-func generatePassword (pattern string, separator string) (string) {
-  words := patternToArray(pattern)
-  return strings.Join(words, separator)
+func getRandomDigit () (int) {
+  r := rand.New(rand.NewSource(time.Now().UnixNano()))
+  var digit int = r.Intn(9)
+  return digit
 }
 
-func patternToArray(pattern string) ([]string) {
-  // TODO iterate over each character in a pattern
-  array := []string{getRandomWord(), getRandomWord(), getRandomWord()}
+func generatePassword (pattern string, separator string) (string) {
+  words := patternToArray(pattern, separator)
+  return strings.Join(words, "")
+}
+
+func patternToArray(pattern string, separator string) ([]string) {
+  array := make([]string, 0)
+
+  for i := 0; i < len(pattern); i++ {
+    // fmt.Println(i, string(pattern[i]));
+
+    if (string(pattern[i]) == "w") {
+      array = append(array, getRandomWord())
+    }
+
+    if (string(pattern[i]) == "d") {
+      array = append(array, strconv.Itoa(getRandomDigit()))
+    }
+
+    if (string(pattern[i]) == "s") {
+      array = append(array, separator)
+    }
+  }
 
   return array
 }
