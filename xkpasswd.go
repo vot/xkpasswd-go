@@ -12,7 +12,7 @@ import "io/ioutil"
 
 import "github.com/urfave/cli"
 
-func readLinesSimple(path string) ([]string, error) {
+func readLines(path string) ([]string, error) {
   content, err := ioutil.ReadFile(path)
   if err != nil {
     return nil, err
@@ -22,9 +22,9 @@ func readLinesSimple(path string) ([]string, error) {
 }
 
 func getWords() (int, []string) {
-  var url string = "xkpasswd-words.txt"
+  var path string = "xkpasswd-words.txt"
 
-  lines, err := readLinesSimple(url)
+  lines, err := readLines(path)
   if err != nil {
     log.Fatalf("readLines: %s", err)
     return 0, nil
@@ -34,7 +34,7 @@ func getWords() (int, []string) {
   return count, lines
 }
 
-func getRandomWord () (string) {
+func getRandomWord() (string) {
   r := rand.New(rand.NewSource(time.Now().UnixNano()))
   allWordsCount, allWords := getWords()
   var randomNumber int = r.Intn(allWordsCount);
@@ -42,13 +42,13 @@ func getRandomWord () (string) {
   return allWords[randomNumber]
 }
 
-func getRandomDigit () (int) {
+func getRandomDigit() (int) {
   r := rand.New(rand.NewSource(time.Now().UnixNano()))
   var digit int = r.Intn(9)
   return digit
 }
 
-func generatePassword (pattern string, separator string) (string) {
+func generatePassword(pattern string, separator string) (string) {
   words := patternToArray(pattern, separator)
   return strings.Join(words, "")
 }
@@ -57,8 +57,6 @@ func patternToArray(pattern string, separator string) ([]string) {
   array := make([]string, 0)
 
   for i := 0; i < len(pattern); i++ {
-    // fmt.Println(i, string(pattern[i]));
-
     if (string(pattern[i]) == "w") {
       array = append(array, getRandomWord())
     }
@@ -75,7 +73,7 @@ func patternToArray(pattern string, separator string) ([]string) {
   return array
 }
 
-func getSeparatorForComplexity (level int) (string) {
+func getSeparatorForComplexity(level int) (string) {
   // enforce limits
   if level < 1 {
     level = 1
@@ -101,7 +99,7 @@ func getSeparatorForComplexity (level int) (string) {
   return string(rtn)
 }
 
-func getPatternForComplexity (level int) (string) {
+func getPatternForComplexity(level int) (string) {
   // enforce limits
   if level < 1 {
     level = 1
@@ -142,7 +140,7 @@ func getPatternForComplexity (level int) (string) {
 }
 
 func main() {
-  // TODO download list of words if missing
+  // TODO flag to specify list of words, fallback to default (+download if missing)
   app := cli.NewApp()
   app.Name = "xkpasswd"
   app.Version = "0.0.1"
