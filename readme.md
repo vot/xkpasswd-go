@@ -88,7 +88,7 @@ The first letters (**w**, **d** and **s** respectively) are used in pattern stri
 
 For example:
 
-* `w` will return a single word (i.e. `demographics`). Use `w` for lowercase and `W` for uppercase.
+* `w` will return a single word (i.e. `demographics`)
 * `wsd` will return a word and a digit, separated by one of the permitted separators (i.e. `storm#7`)
 * `wswsdd` will return two words followed by a two digit number, all with separators between (i.e. `delates+dissembled+16`)
 
