@@ -76,13 +76,6 @@ func patternToArray(pattern string, separator string) ([]string) {
 }
 
 func getSeparatorForComplexity (level int) (string) {
-  // TODO get a random character from string
-  return "#"
-}
-
-func getPatternForComplexity (level int) (string) {
-  rtn := "wswsw"
-
   // enforce limits
   if level < 1 {
     level = 1
@@ -92,7 +85,35 @@ func getPatternForComplexity (level int) (string) {
     level = 6
   }
 
-  // define level patterns
+  // define allowed separators
+  var separatorPool string = "#.-=+_"
+
+  if level == 5 {
+    separatorPool = "#.-=+_!$*:~?"
+  }
+
+  if level == 6 {
+    separatorPool = "#.-=+_!$*:~?%^&;"
+  }
+
+  rtn := separatorPool[getRandomDigit()]
+
+  return string(rtn)
+}
+
+func getPatternForComplexity (level int) (string) {
+  // enforce limits
+  if level < 1 {
+    level = 1
+  }
+
+  if level > 6 {
+    level = 6
+  }
+
+  // define the pattern
+  var rtn string
+
   if level == 1 {
     rtn = "wsw"
   }
