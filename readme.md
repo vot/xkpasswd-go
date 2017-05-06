@@ -24,7 +24,7 @@ Copy the file to your bin folder with  `cp xkpasswd /usr/local/bin/xkpasswd`.
 **CLI OPTIONS**
 
 ```
-xkpasswd-go --complexity <number> --separators <string> --pattern <string> --transform <string> --number <number>
+xkpasswd --complexity <number> --separators <string> --pattern <string> --transform <string> --number <number>
 ```
 
 
@@ -45,24 +45,24 @@ amount with the `--number [-n]` argument. Defaults to 1.
 **EXAMPLE** Default behaviour
 
 ```
-$ xkpasswd-go
+$ xkpasswd
 hide+threw+money+61
 ```
 
 **EXAMPLE** Specify complexity
 
 ```
-$ xkpasswd-go -c 5
+$ xkpasswd -c 5
 join=industrial=wide=direction=lungs=16
 
-$ xkpasswd-go -c 6
+$ xkpasswd -c 6
 57!fifthly!astronauts!affectedly!nymphs!trustlessnesses!06
 ```
 
 **EXAMPLE** Specify custom pattern
 
 ```
-$ xkpasswd-go -p wdwd
+$ xkpasswd -p wdwd
 
 adjective3solar6
 ```
@@ -71,7 +71,7 @@ adjective3solar6
 **EXAMPLE** Specify complexity, custom separators and number of passwords
 
 ```
-$ xkpasswd-go -c 3 -s '#!+' -n 5
+$ xkpasswd -c 3 -s '#!+' -n 5
 
 dog!friend!successful!47
 other#sell#close#01
@@ -113,11 +113,15 @@ default patterns as well as expanded sets of separators.
 
 ## Building project
 
-Checkout a copy of this project
+If you'd like to build the project yourself instead of grabbing a prebuilt copy,
+here are the steps:
+
+1) Checkout a copy of this project
+
 ```
 git clone https://github.com/vot/xkpasswd-go
 cd xkpasswd-go
 ```
 
-To build the project run:
+2) Build the project
 `go build xkpasswd.go`
