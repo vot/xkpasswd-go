@@ -7,8 +7,9 @@ import "strings"
 import "strconv"
 import "os"
 
-import "math/rand"
 import "io/ioutil"
+import "math/rand"
+import "path/filepath"
 
 import "github.com/urfave/cli"
 
@@ -22,7 +23,12 @@ func readLines(path string) ([]string, error) {
 }
 
 func getWords() (int, []string) {
-  var path string = "xkpasswd-words.txt"
+  executablePath, err := os.Executable()
+  if err != nil {
+      panic(err)
+  }
+  executableDir := filepath.Dir(executablePath)
+  var path string = strings.Replace("%s/xkpasswd-words.txt", "%s", executableDir, -1)
 
   lines, err := readLines(path)
   if err != nil {
