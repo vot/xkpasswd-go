@@ -1,4 +1,4 @@
-package xkpasswd
+package main
 
 import "fmt"
 import "log"
