@@ -137,7 +137,9 @@ cd xkpasswd-go
 
 **v0.0.2**
 
-- Initial version of this package
+- Dynamic separator selection
+- Fix pattern parsing
+- Add CLI flags
 
 **v0.0.1**
 
