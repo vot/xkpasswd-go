@@ -42,9 +42,9 @@ func getRandomWord() (string) {
   return allWords[randomNumber]
 }
 
-func getRandomDigit() (int) {
+func getRandomDigit(numLimit int) (int) {
   r := rand.New(rand.NewSource(time.Now().UnixNano()))
-  var digit int = r.Intn(9)
+  var digit int = r.Intn(numLimit)
   return digit
 }
 
@@ -62,7 +62,7 @@ func patternToArray(pattern string, separator string) ([]string) {
     }
 
     if (string(pattern[i]) == "d") {
-      array = append(array, strconv.Itoa(getRandomDigit()))
+      array = append(array, strconv.Itoa(getRandomDigit(10)))
     }
 
     if (string(pattern[i]) == "s") {
@@ -94,7 +94,7 @@ func getSeparatorForComplexity(level int) (string) {
     separatorPool = "#.-=+_!$*:~?%^&;"
   }
 
-  rtn := separatorPool[getRandomDigit()]
+  rtn := separatorPool[getRandomDigit(len(separatorPool))]
 
   return string(rtn)
 }
