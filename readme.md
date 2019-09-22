@@ -12,7 +12,7 @@ offramps#schappes#skywrite
 
 ## Quickstart
 
-You can [download Mac and Linux binaries](https://github.com/vot/xkpasswd-go/releases/tag/0.0.1).
+You can [download Mac and Linux binaries](https://github.com/vot/xkpasswd-go/releases).
 Make sure to grab `xkpasswd-words.txt` too and put it in the same folder as the binary.
 
 You can then execute it with `./xkpasswd`.
@@ -125,3 +125,20 @@ cd xkpasswd-go
 
 2) Build the project
 `go build xkpasswd.go`
+
+## Changelog
+
+**v0.0.3**
+
+- Fix issue 1: use executable location as a base dir for dictionary file
+- Fix issue 2: random digit generation now sticks to the limit provided
+- Give package a proper name (`main` -> `xkpasswd`)
+- Format code
+
+**v0.0.2**
+
+- Initial version of this package
+
+**v0.0.1**
+
+- Initial version of this package
